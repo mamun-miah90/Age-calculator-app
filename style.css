@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('./assets/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-BoldItalic';
+    src: url('./assets/fonts/Poppins-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-ExtraBold';
+    src: url('./assets/fonts/Poppins-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-Italic';
+    src: url('./assets/fonts/Poppins-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-ExtraBoldItalic';
+    src: url('./assets/fonts/Poppins-ExtraBoldItalic.ttf') format('truetype');
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins-Regular', sans-serif;
+  }
+  
+  body {
+    background-color: #f2f3f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 1rem;
+  }
+
+  .container {
+    background: white;
+    padding: 3rem;
+    border-radius: 10px 10px 40px 10px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+  }
+  .inputs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .input-group {
+    flex: 1;
+    position: relative;
+  }
+  .input-group label {
+    display: block;
+    font-size: 1rem;
+    color: hsl(0, 1%, 44%);
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+  .input-group input {
+    border: 1px hsl(0, 0%, 86%) solid;
+    width: 90%;
+    padding: 0.8rem;
+    font-size: 1.5rem;
+    font-family: 'Poppins-Bold', sans-serif;
+    border-radius: 7px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .input-group input.invalid {
+    border-color:  hsl(0, 100%, 67%);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align:end;
+    margin: 1rem 0
+  }
+  .divider .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc; /* Adjust color as needed */
+   /* Space between line and button */
+  }
+
+  .divider button {
+    background-color: hsl(259, 100%, 65%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    
+  }
+  
+
+  .error {
+    color: hsl(0, 100%, 67%);
+    text-align: center;
+  }
+  .output {
+    font-size: 4rem;
+    
+  }
+  .output div {
+    font-family: 'Poppins-ExtraBoldItalic', sans-serif;
+    
+  }
+  .output div span {
+    font-family: 'Poppins-ExtraBoldItalic', sans-serif;
+    color: hsl(259, 100%, 65%);
+  }
+
+  @media (max-width: 500px) {
+    .output {
+      font-size: 1.5rem;
+    }
+  }
