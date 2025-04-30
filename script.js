@@ -1,31 +1,14 @@
-document.getElementById("calculateBtn").addEventListener("click", function() {
-    calulateValidAge(this);
-});
 
-function calulateValidAge(button) {
-    button.style.backgroundColor = 'black';
+function getDate(){
     const day = parseInt(document.getElementById("day").value, 10);
     const month = parseInt(document.getElementById("month").value, 10);
     const year = parseInt(document.getElementById("year").value, 10);
-
-    //Clear previous errors
+    return {day, month, year};
+}
+function clearErrors() {
     document.getElementById("error-day").innerHTML = "";
     document.getElementById("error-month").innerHTML = "";
     document.getElementById("error-year").innerHTML = "";
-
-    //Check if the inputs are valid
-    if(!validateInputs(day, month, year)) {
-        return;
-    } 
-    //Check if the date is valid and not in the future
-    if(!validateDate(day, month, year)) {
-        return;
-    }
-    //If the inputs are valid, calculate the age
-    let result  = calculateAge(day, month, year);
-
-     //Set the result 
-     setResult(result);
 }
 
 //validate inputs function to check if the inputs are valid
@@ -93,5 +76,30 @@ function setResult(result) {
     document.getElementById("years").innerHTML = result.years;
     document.getElementById("months").innerHTML = result.months; 
     document.getElementById("days").innerHTML = result.days;
+}
+
+document.getElementById("calculateBtn").addEventListener("click", function() {
+    calulateValidAge(this);
+});
+
+function calulateValidAge(button) {
+    button.style.backgroundColor = 'black';
+    
+    const {day, month, year} = getDate();
+    //Clear previous errors
+    clearErrors();
+    //Check if the inputs are valid
+    if(!validateInputs(day, month, year)) {
+        return;
+    } 
+    //Check if the date is valid and not in the future
+    if(!validateDate(day, month, year)) {
+        return;
+    }
+    //If the inputs are valid, calculate the age
+    let result  = calculateAge(day, month, year);
+
+     //Set the result 
+    setResult(result);
 }
 
