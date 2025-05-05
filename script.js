@@ -33,10 +33,14 @@ function validateDate(day, month, year) {
     const date = new Date(year, month - 1, day);
     console.log(date);
     // Check if the date is created correctly 
-    if (date.getDate() !== day || month - 1 !== date.getMonth() || date.getFullYear() !== year) {
-        document.getElementById("error-day").innerHTML = "Please enter a valid date.";
-        document.getElementById("error-month").innerHTML = "Please enter a valid date.";
-        document.getElementById("error-year").innerHTML = "Please enter a valid date.";
+    if(date.getDate() !== day) {
+        document.getElementById("error-day").innerHTML = "Please enter a valid day.";
+        return false;
+    }else if (month - 1 !== date.getMonth()) {
+        document.getElementById("error-month").innerHTML = "Please enter a valid month.";
+        return false;
+    } else if (date.getFullYear() !== year) {
+        document.getElementById("error-year").innerHTML = "Please enter a valid year.";
         return false;
     }
 
@@ -90,19 +94,33 @@ function setResult(result) {
 }
 
 
+document.getElementById("datePicker").addEventListener("change", function () {
+    const selectedDate = new Date(this.value);
+    if (!isNaN(selectedDate)) {
+        document.getElementById("day").value = selectedDate.getDate();
+        document.getElementById("month").value = selectedDate.getMonth() + 1; // Months are 0-indexed
+        document.getElementById("year").value = selectedDate.getFullYear();
+        
+        this.style.color = 'black'; // Change color to black when a date is selected
+        // Trigger real-time calculation
+        calculateValidAge();
+    }
+});
+
+
 
 document.getElementById("calculateBtn").addEventListener("click", function() {
-    calulateValidAge();
+    calculateValidAge();
 });
 
 
 // Add event listeners to the input fields for real-time calculation
-document.getElementById("day").addEventListener("input", calulateValidAge);
-document.getElementById("month").addEventListener("input", calulateValidAge);
-document.getElementById("year").addEventListener("input", calulateValidAge);
+document.getElementById("day").addEventListener("input", calculateValidAge);
+document.getElementById("month").addEventListener("input", calculateValidAge);
+document.getElementById("year").addEventListener("input", calculateValidAge);
 
 
-function calulateValidAge() {
+function calculateValidAge() {
     const button = document.getElementById("calculateBtn");
     button.style.backgroundColor = 'black';
     
@@ -123,4 +141,6 @@ function calulateValidAge() {
      //Set the result 
     setResult(result);
 }
+
+
 

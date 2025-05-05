@@ -17,35 +17,57 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="inputs">
-      <div class="input-group">
-        <label for="day">DAY</label>
-        <input type="number" id="day" placeholder="DD">
-        <p class="error" id="error-day"></p>
+  <div class="main-container">
+    <div class="container">
+      <div id="datePicker-container">
+        <div class="input-group">
+          <label for="datePicker">Select Date</label>
+          <input type="date" id="datePicker">
+        </div>
       </div>
-      <div class="input-group">
-        <label for="month">MONTH</label>
-        <input type="number" id="month" placeholder="MM">
-        <p class="error" id="error-month"></p>
+  
+      <div class="inputs">
+        <div class="input-group">
+          <label for="day">DAY</label>
+          <input type="number" id="day" placeholder="DD">
+          <p class="error" id="error-day"></p>
+        </div>
+        <div class="input-group">
+          <label for="month">MONTH</label>
+          <input type="number" id="month" placeholder="MM">
+          <p class="error" id="error-month"></p>
+        </div>
+        <div class="input-group">
+          <label for="year">YEAR</label>
+          <input type="number" id="year" placeholder="YYYY">
+          <p class="error" id="error-year"></p>
+        </div>
       </div>
-      <div class="input-group">
-        <label for="year">YEAR</label>
-        <input type="number" id="year" placeholder="YYYY">
-        <p class="error" id="error-year"></p>
+      <div class="divider">
+        <div class="line"></div>
+        <div class="buttons">
+          <button id="calculateBtn">Calc</button>
+          <button id="saveBtn">Save</button>
+        </div>
+        <!-- <button id = "calculateBtn">↓</button> -->
+        
       </div>
+      <div class="output">
+        <div><span id="yearsResult">--</span> <span id="yearsLabel"> years </span></div>
+        <div><span id="monthsResult">--</span> <span id="monthsLabel"> months</span> </div>
+        <div><span id="daysResult">--</span> <span id="daysLabel">days</span></div>
+      </div>
+  
     </div>
-    <div class="divider">
-      <div class="line"></div>
-      <button id = "calculateBtn">↓</button>
-    </div>
-    <div class="output">
-      <div><span id="yearsResult">--</span> <span id="yearsLabel"> years </span></div>
-      <div><span id="monthsResult">--</span> <span id="monthsLabel"> months</span> </div>
-      <div><span id="daysResult">--</span> <span id="daysLabel">days</span></div>
+       <!-- Right-side panel for history -->
+    <div class="history-panel">
+      <h3>Calculation History</h3>
+      <ul id="historyList"></ul>
     </div>
 
   </div>
+
+  
   
   <script src="./script.js">
     
