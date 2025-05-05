@@ -40,7 +40,6 @@ function validateDate(day, month, year) {
         return false;
     }
 
-    // Check if the date is in the future
     const today = new Date();
      if (date > today) {
          document.getElementById("error-year").innerHTML = "The date cannot be in the future.";
@@ -73,16 +72,38 @@ function calculateAge(day, month, year) {
 
 // Function to set the result in the HTML elements
 function setResult(result) {
-    document.getElementById("years").innerHTML = result.years;
-    document.getElementById("months").innerHTML = result.months; 
-    document.getElementById("days").innerHTML = result.days;
+    const yearsResult = document.getElementById("yearsResult");
+    const monthsResult = document.getElementById("monthsResult");
+    const daysResult = document.getElementById("daysResult");
+    
+    yearsResult.innerHTML = `${result.years}`;
+    monthsResult.innerHTML = `${result.months} `;
+    daysResult.innerHTML = `${result.days}`;
+
+    const yearsLabel = document.getElementById("yearsLabel");
+    const monthsLabel = document.getElementById("monthsLabel");
+    const daysLabel = document.getElementById("daysLabel");
+
+    yearsLabel.innerHTML = result.years < 2 ? 'year' : 'years';   
+    monthsLabel.innerHTML = result.months < 2 ? 'month' : 'months';
+    daysLabel.innerHTML = result.days < 2 ? 'day' : 'days';
 }
 
+
+
 document.getElementById("calculateBtn").addEventListener("click", function() {
-    calulateValidAge(this);
+    calulateValidAge();
 });
 
-function calulateValidAge(button) {
+
+// Add event listeners to the input fields for real-time calculation
+document.getElementById("day").addEventListener("input", calulateValidAge);
+document.getElementById("month").addEventListener("input", calulateValidAge);
+document.getElementById("year").addEventListener("input", calulateValidAge);
+
+
+function calulateValidAge() {
+    const button = document.getElementById("calculateBtn");
     button.style.backgroundColor = 'black';
     
     const {day, month, year} = getDate();
