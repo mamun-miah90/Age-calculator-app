@@ -80,17 +80,17 @@ function setResult(result) {
     const monthsResult = document.getElementById("monthsResult");
     const daysResult = document.getElementById("daysResult");
     
-    yearsResult.innerHTML = `${result.years}`;
-    monthsResult.innerHTML = `${result.months} `;
-    daysResult.innerHTML = `${result.days}`;
+    yearsResult.innerText = `${result.years}`;
+    monthsResult.innerText = `${result.months} `;
+    daysResult.innerText = `${result.days}`;
 
     const yearsLabel = document.getElementById("yearsLabel");
     const monthsLabel = document.getElementById("monthsLabel");
     const daysLabel = document.getElementById("daysLabel");
 
-    yearsLabel.innerHTML = result.years < 2 ? 'year' : 'years';   
-    monthsLabel.innerHTML = result.months < 2 ? 'month' : 'months';
-    daysLabel.innerHTML = result.days < 2 ? 'day' : 'days';
+    yearsLabel.innerText = result.years < 2 ? 'year' : 'years';   
+    monthsLabel.innerText = result.months < 2 ? 'month' : 'months';
+    daysLabel.innerText= result.days < 2 ? 'day' : 'days';
 }
 
 
@@ -144,3 +144,66 @@ function calculateValidAge() {
 
 
 
+let history = JSON.parse(localStorage.getItem("calculationHistory")) || [];
+
+// Function to save history to local storage
+function saveHistoryToLocalStorage() {
+    localStorage.setItem("calculationHistory", JSON.stringify(history));
+}
+
+function renderHistory() {
+
+    const historyList = document.getElementById("historyList");
+    historyList.innerHTML = "";
+
+    history.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+        <span> <h4> Tittle : ${item.title}</h4> ${item.result} </span>
+        <div class = "buttons">
+         <button class = "edit" onclick = "editHistory(${index})"> Edit </button>
+        <button class = "delete" onclick = "deleteHistory(${index})"> Delete </button>
+        </div>
+        `;
+        historyList.appendChild(li);
+    });
+    
+}
+
+
+
+document.getElementById("saveBtn").addEventListener("click", function () {
+    const title = prompt("Enter a title for this calculation: ");
+    if(!title) return;
+    const years = document.getElementById("yearsResult").innerText || "--";
+    const months = document.getElementById("monthsResult").innerText || "--";
+    const days = document.getElementById("daysResult").innerText || "--";
+
+    console.log(years, months, days);
+
+    const yearLabel = years <= 1 ? "year" : "years";
+    const monthLabel = months <= 1 ? "month" : "months";
+    const dayLabel = days <= 1 ? "day" : "days";
+    const result = `${years} ${yearLabel}, ${months} ${monthLabel}, ${days} ${dayLabel}`;
+
+    history.push({title, result});
+    saveHistoryToLocalStorage();
+    renderHistory();
+});
+
+function deleteHistory(index) {
+    const confirmDelete = confirm("Are you sure you want to delete this history?");
+    if (!confirmDelete) return;
+    history.splice(index, 1);
+    saveHistoryToLocalStorage();
+    renderHistory();
+}
+function editHistory(index) {
+    const newTitle = prompt("Enter a new title for this calculation: ", history[index].title);
+    if (!newTitle) return;
+    history[index].title = newTitle;
+    saveHistoryToLocalStorage();
+    renderHistory();
+}
+
+renderHistory();
